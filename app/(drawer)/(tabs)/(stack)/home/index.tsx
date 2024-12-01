@@ -1,9 +1,15 @@
 import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 import CustomButton from "@/components/CustomButton";
-import { Link, router } from "expo-router";
+import { Link, router, useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const onToggleDrawer = () => {
+    navigation.dispatch(DrawerActions.toggleDrawer);
+  };
   return (
     <SafeAreaView className="flex flex-1 ">
       <View className="px-10 mt-5">
@@ -35,11 +41,14 @@ const HomeScreen = () => {
           Settings
         </CustomButton>
 
-        <Link href={"/products"} asChild>
-          <CustomButton variant="text-only" className="mb-2" color="secondary">
-            Products
-          </CustomButton>
-        </Link>
+        <CustomButton
+          onPress={onToggleDrawer}
+          variant="text-only"
+          className="mb-2"
+          color="secondary"
+        >
+          Abrir Menu
+        </CustomButton>
       </View>
     </SafeAreaView>
   );
